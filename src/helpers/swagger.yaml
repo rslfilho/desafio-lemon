@@ -1,0 +1,53 @@
+---
+swagger: '2.0'
+info:
+  title: API de checagem de elegibilidade de clientes
+  version: 0.0.1
+  description: |
+    API para o desafio técnico da Lemon
+
+    Aplicante: Roberval Filho
+
+    Desafio: Criar um programa que recebesse informações da conta de luz de um potencial cliente da Lemon e retornasse se esse cliente é ou não elegível para o serviço. Criei uma API REST em Node.js e Express para receber, lidar e responder as informações necessárias solicitadas na descrição do desafio.
+    
+    Email: rslfilho@gmail.com
+    Github: https://github.com/rslfilho
+    LinkedIn: https://www.linkedin.com/in/rslfilho/
+    Data: 21/03/2022
+basePath: /
+paths:
+  /elegibility:
+    post:
+      tags:
+        - Checagem
+      summary: "Rota de checagem da elegibilidade do cliente"
+      description: Recebe as informações da conta de luz do cliente a partir do corpo da requisição, verifica se as informações são válidas e depois checa se o cliente é elegível ou não para o serviço
+      parameters:
+        - in: body
+          name: body
+          type: object
+          required: true
+          schema:
+            type: object
+            properties:
+              numeroDoDocumento: 
+                type: string
+              tipoDeConexao:
+                type: string
+              classeDeConsumo:
+                type: string
+              modalidadeTarifaria:
+                type: string
+              historicoDeConsumo:
+                type: array
+                items:
+                  type: number
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Retorna no corpo da resposta um objeto com uma chave informando se o cliente é elegível ou não, e outra com detalhes sobre o motivo da não elegibilidade ou com a economia de CO2 que o cliente gera aderindo ao serviço
+        400:
+          description: Algum dos campos do corpo da requisição foi enviado mal formatado, ausente ou inválido
+        500:
+          description: Erro interno do servidor
