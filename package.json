@@ -1,0 +1,19 @@
+{
+  "name": "desafio-lemon",
+  "version": "1.0.0",
+  "main": "src/api/index.js",
+  "repository": "git@github.com:rslfilho/desafio-lemon.git",
+  "author": "Roberval Filho <rslfilho@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon .",
+    "test": "mocha src/tests/**/*$NAME*.test.js --exit",
+    "test:coverage": "nyc --all --reporter=lcov npm run test",
+    "test:unit": "mocha src/tests/01-unit/*$NAME*.test.js --exit",
+    "test:unit:coverage": "nyc --all npm run test:unit",
+    "test:integration": "mocha src/tests/02-integration/*$NAME*.test.js --exit",
+    "test:integration:coverage": "nyc --all npm run test:integration",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+  }
+}
