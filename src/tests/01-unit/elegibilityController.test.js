@@ -15,6 +15,23 @@ describe('O controller da rota POST/elegibility', () => {
     response.json = sinon.stub().returns();
     next = sinon.stub().returns();
   });
+
+  describe('quando há um erro inesperado', () => {
+    before(async () => {
+      sinon.stub(elegibilityService, 'check').throwsException();
+      request.body = input.elegible;
+      await elegibilityController.check(request, response, next);
+    });
+
+    after(async () => {
+      await elegibilityService.check.restore();
+      request.body = undefined;
+    });
+
+    it('a função next é chamada', () => {
+      expect(next.called).to.be.true;
+    });
+  });
   
   describe('responde com uma negativa de elegibilidade quando', () => {
     describe('a classe de consumo é inválida', () => {
